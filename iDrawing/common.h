@@ -1,0 +1,93 @@
+
+#ifndef _COMMON_H
+#define _COMMON_H
+
+
+/*PIN define*/
+#define PALETTE_PIN_BLK 13
+#define PALETTE_PIN_SW  7
+#define PALETTE_PIN_MVCC  4
+#define PALETTE_PIN_LVCC_FLASH1  5
+#define PALETTE_PIN_LVCC_FLASH2  6
+#define PALETTE_PIN_LVCC_FADE  11
+
+#define PALETTE_PIN_PIR  8
+
+#define PALETTE_PIN_RGB  10
+#define PALETTE_PIN_TOUCH  A3
+#define PALETTE_PIN_BLOW   A4
+#define PALETTE_PIN_LIGHT  A5
+
+#define PALETTE_PIN_VIRTUAL_TIME  254
+#define PALETTE_PIN_UART  253
+#define PALETTE_PIN_I2C   252
+#define PALETTE_PIN_NULL  255
+
+
+/**Swith(SW) define**/
+#define SW_MAKE HIGH
+#define SW_RUN  LOW
+
+
+/****/
+#define FUNCTION_LED 0
+#define FUNCTION_RGB 1
+#define FUNCTION_PLAYER_MINI 2
+#define FUNCTION_ACTUATOR_DIGITAL 3
+
+
+#define FUNCTION_SENSOR_BASE 0X80
+#define FUNCTION_SENSOR_VIRTUALTIME (FUNCTION_SENSOR_BASE+1)
+#define FUNCTION_SENSOR_DIGITAL  (FUNCTION_SENSOR_BASE+10)
+#define FUNCTION_SENSOR_ANALOG   (FUNCTION_SENSOR_BASE+11)
+
+
+#define WORD2BYTES(val) (val & 0xFF), ((val>>8) & 0xFF)   //AVR is Little Endian
+/** data define for communication between PC and controller **/
+#define PARATYPE_RUNMETHOD_ID 0
+#define PARATYPE_CTLMETHOD_ID 1
+#define PARATYPE_PERIOD_ID    2
+#define PARATYPE_INDEX_ID     4
+#define PARATYPE_INIT_STATE_ID   5
+
+
+
+
+#define PARATYPE_RUNMETHOD(para) PARATYPE_RUNMETHOD_ID, 1, para
+#define PARATYPE_CTLMETHOD(para) PARATYPE_CTLMETHOD_ID, 1, para
+#define PARATYPE_PERIOD(para)    PARATYPE_PERIOD_ID, 2, WORD2BYTES(para)       // 2 bytes;  uint:milliseconds
+#define PARATYPE_INDEX(para)     PARATYPE_INDEX_ID, 1, para
+#define PARATYPE_INIT_STATE(para)     PARATYPE_INIT_STATE_ID, 1, para
+
+
+
+#define CTLMETHOD_FIX    20
+#define CTLMETHOD_RANDOM  21
+#define CTLMETHOD_SENSOR  22
+
+#define LED_LIGHTMETHOD_FLASH  30
+#define LED_LIGHTMETHOD_FADE 31
+
+
+
+
+#define RUNMETHOD_RANDOM  40
+#define RUNMETHOD_ALLCYCLE  41
+#define RUNMETHOD_FILEINDEX 42
+
+#define RUNMETHOD_PULSE_POSITIVE 50
+#define RUNMETHOD_PULSE_NEGATIVE 51
+#define RUNMETHOD_HIGH HIGH
+#define RUNMETHOD_LOW  LOW
+
+
+
+/****/
+#define PALETTE_TIMER_PERIOD 50  //uint: ms
+
+
+
+
+
+
+#endif
