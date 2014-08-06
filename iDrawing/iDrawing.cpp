@@ -108,10 +108,14 @@ void Palette::setWakeCondition( uint8_t condition )
 
 boolean Palette::setRule( PaletteRuleConfigRec_stru *pRuleConfig, uint8_t number )
 {
-    uint8_t i;
+    uint8_t i, j;
     uint8_t actionType;  //start,stop
+    uint8_t attachPin, functionID;
+
     boolean ret;
     char strBuf[64];
+
+    PaletteRuleConfigRec_stru *pConfig = NULL;
 
     /**get task from eeprom**/
     /*if nodata in eeprom*/
@@ -122,6 +126,36 @@ boolean Palette::setRule( PaletteRuleConfigRec_stru *pRuleConfig, uint8_t number
         showErrInfo( strBuf );
 
         return false;
+    }
+
+    for ( i = 0; i < number; i++ )
+    {
+        pConfig = pRuleConfig + i;
+        actionType = pConfig->actionType;
+        attachPin = pConfig->actuator.attachPin;
+        functionID = pConfig->actuator.ID;
+
+        if ( ACTION_RUN == actionType )
+        {
+
+            for ( j = i+1; j < number; j++ )
+            {
+                pConfig = pRuleConfig + j;
+
+                if ( ACTION_RUN == pConfig->actionType )
+                {
+                    if ( (attachPin == pConfig->actuator.attachPin) && (functionID != pConfig->actuator.ID) )
+                    {
+                        sprintf( strBuf, "Error @Rule No.%u: same PIN with Rule No.%u", j+1, i+1);
+                        showErrInfo( strBuf );
+
+                        return false;
+                    }
+                }
+
+            }
+        }
+
     }
 
     ret = true;
@@ -195,12 +229,11 @@ boolean Palette::setRule( PaletteRuleConfigRec_stru *pRuleConfig, uint8_t number
 
 void Palette::init(PaletteRuleConfigRec_stru *pRuleConfig, uint8_t number)
 {
-    boolean ret;
     /**power on blink**/
     softBlink( 500, 3 );
 
     /**set rules**/
-    ret = setRule(pRuleConfig, number);
+    (void)setRule(pRuleConfig, number);
 
     /** **/
     pRunStateTime = sensor.creatObject(FUNCTION_SENSOR_VIRTUALTIME, PALETTE_PIN_VIRTUAL_TIME);

@@ -32,7 +32,7 @@
 #define _ACTUATOR_H
 
 
-#include "arduino.h"
+#include "Arduino.h"
 #include "public.h"
 #include "Timer.h"
 #include "Player.h"

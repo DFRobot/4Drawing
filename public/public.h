@@ -54,8 +54,13 @@
 #define NTOH16(val)
 #endif
 
+#define INVALID_FLOAT 3.4e38
+#define INVALID_INT16 -32768
+#define INVALID_UINT8 0xFF
 
 
+#define INT16_MIN -32768
+#define INT16_MAX 32767
 
 
 /****/

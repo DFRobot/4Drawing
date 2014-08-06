@@ -32,7 +32,7 @@
 #ifndef _SENSOR_H
 #define _SENSOR_H
 
-#include "arduino.h"
+#include "Arduino.h"
 #include "public.h"
 
 

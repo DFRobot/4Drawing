@@ -32,7 +32,7 @@
 #ifndef _IDRAWING_H
 #define _IDRAWING_H
 
-#include "arduino.h"
+#include "Arduino.h"
 #include "public.h"
 #include "Timer.h"
 #include "sensor.h"

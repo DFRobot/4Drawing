@@ -32,7 +32,7 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-#include "arduino.h"
+#include "Arduino.h"
 #include "public.h"
 
 
